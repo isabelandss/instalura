@@ -71,6 +71,10 @@ export default class Post extends React.Component {
         )
     }
 
+    adicionaComentario() {
+        this.inputComentario.clear();
+    }
+
   render() {
       
     const { foto } = this.state;
@@ -100,9 +104,12 @@ export default class Post extends React.Component {
 
                 <View style={ styles.novoComentario }>    
                     <TextInput style={ styles.input } 
-                    placeholder="Adicione um comentário"/>
+                    placeholder="Adicione um comentário" ref={ input => this.inputComentario = input }/>
 
-                    {<Image style={ styles.icon } source={ require("../../resources/img/send.png") }/>}
+                    <TouchableOpacity onPress={ this.adicionaComentario.bind(this) }>
+                        <Image style={ styles.icon } source={ require("../../resources/img/send.png") }/>
+                    </TouchableOpacity>
+
                 </View>
             </View>
         </View>
