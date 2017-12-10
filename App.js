@@ -5,28 +5,38 @@ import {
   View,
   Image,
   Dimensions,
-  ScrollView, FlatList } from 'react-native'
+  ScrollView, 
+  FlatList } from 'react-native'
+
+import Post from './src/components/Post'
 
 const width = Dimensions.get("screen").width
 
+//https://instalura-api.herokuapp.com/api/public/fotos/rafael
+
 export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      fotos: []
+    }
+  }
+
+  componentDidMount() {
+    fetch("https://instalura-api.herokuapp.com/api/public/fotos/rafael") 
+      .then(resposta => resposta.json())
+      .then(json => this.setState({ fotos: json }))
+  }
+
   render() {
-    const fotos = [
-      { id: 1, usuario: "Isabela" },
-      { id: 2, usuario: "Matheus" } ]
+    
     return (
       <FlatList
         style={ styles.container }
         keyExtractor={ item => item.id }
-        data ={fotos}
+        data ={ this.state.fotos } 
         renderItem={ ({item}) =>
-            <View>
-              <View style={ styles.cabecalho }>
-                <Image source={ require("./resources/img/foto1.png") } style={ styles.fotoDePerfil }/>
-                <Text>{ item.usuario }</Text>
-              </View>
-              <Image source={ require("./resources/img/foto1.png") } style={ styles.foto }/>
-          </View>
+            <Post foto={item}/>
         }
       />
     );
@@ -36,20 +46,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20
-  },
-  cabecalho: {
-    margin: 10, 
-    flexDirection: "row", 
-    alignItems: "center"
-  },
-  fotoDePerfil: {
-    width: 40, 
-    height: 40, 
-    marginRight: 10, 
-    borderRadius: 20 
-  },
-  foto: {
-    width: width, 
-    height: width
   }
 })
