@@ -45,6 +45,14 @@ export default class Post extends React.Component {
         //     })
         // }
 
+        if(!this.state.foto.likeada) {
+            novaLista = this.state.foto.likers.concat({ login: "meuUsuario" })
+        } else {
+            novaLista = this.state.foto.likers.filter(liker => {
+                return liker.login !== "meuUsuario"
+            })
+        }
+
         const fotoAtualizada = {
             ...this.state.foto,
             likeada: !this.state.foto.likeada,
