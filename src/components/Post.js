@@ -15,7 +15,8 @@ export default class Post extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            foto: this.props.foto
+            foto: this.props.foto,
+            valorComentario: ""
         }
     }
 
@@ -26,20 +27,23 @@ export default class Post extends React.Component {
     }
 
     like() {
-
-        const { foto } = this.state;
+        // const { foto } = this.state;
         let novaLista = []
 
-        if(!foto.likeada) {
-            let novaLista = [
-                ...this.likers,
-                { login: "meuUsuario" }
-            ]
-        } else {
-            novaLista = foto.likers.filter(liker => {
-                return liker.login !== "meuUsuario"
-            })
+        if(!this.state.foto.likeada) {
+            novaLista = this.state.foto.likers.concat({ login: "meuUsuario" })
         }
+
+        // if(!foto.likeada) {
+        //     let novaLista = [
+        //         ...foto.likers,
+        //         { login: "meuUsuario" }
+        //     ]
+        // } else {
+        //     novaLista = foto.likers.filter(liker => {
+        //         return liker.login !== "meuUsuario"
+        //     })
+        // }
 
         const fotoAtualizada = {
             ...this.state.foto,
@@ -72,7 +76,23 @@ export default class Post extends React.Component {
     }
 
     adicionaComentario() {
-        this.inputComentario.clear();
+
+        if(this.state.valorComentario === '') {
+            return;
+        }
+        const novaLista = [...this.state.foto.comentarios, {
+            id: this.state.valorComentario,
+            login: 'meuUsuario',
+            texto: this.state.valorComentario
+        }]
+
+        const fotoAtualizada = {
+            ...this.state.foto,
+            comentarios: novaLista
+        }
+
+        this.setState({ foto: fotoAtualizada, valorComentario: '' })
+        this.inputComentario.clear()
     }
 
   render() {
@@ -104,7 +124,8 @@ export default class Post extends React.Component {
 
                 <View style={ styles.novoComentario }>    
                     <TextInput style={ styles.input } 
-                    placeholder="Adicione um comentário" ref={ input => this.inputComentario = input }/>
+                    placeholder="Adicione um comentário" ref={ input => this.inputComentario = input }
+                    onChangeText={ texto => this.setState({ valorComentario: texto })}/>
 
                     <TouchableOpacity onPress={ this.adicionaComentario.bind(this) }>
                         <Image style={ styles.icon } source={ require("../../resources/img/send.png") }/>
