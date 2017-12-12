@@ -23,6 +23,7 @@ export const Tabs = TabNavigator({
     headerMode: 'none',
     tabBarPosition: 'bottom',
     tabBarOptions: {
+      indicatorStyle: { backgroundColor: 'transparent', },
       showLabel: (Platform.OS !== 'android'),
       showIcon: 'true',
       activeTintColor: 'red',
