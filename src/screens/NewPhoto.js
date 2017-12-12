@@ -33,21 +33,12 @@ export default class NewPhoto extends React.Component {
           return <Text>No access to camera</Text>;
         } else {
             return (
-                <View style={{ flex: 1 }}>
-                <Camera style={{ flex: 1 }} type={this.state.type}>
-                  <View
-                    style={{
-                      flex: 1,
-                      backgroundColor: 'transparent',
-                      flexDirection: 'row',
-                    }}>
-                    <TouchableOpacity
-                      style={{
-                        flex: 1,
-                        alignSelf: 'flex-start',
-                        alignItems: 'center',
-                        flexDirection: "row",
-                      }}
+              <View style={{ flex: 1 }}>
+
+                <Camera style={ styles.camera } type={this.state.type}>
+
+                  <View style={ styles.areaBotaoFlip }>
+                    <TouchableOpacity style={ styles.botaoFlip }
                       onPress={() => {
                         this.setState({
                           type: this.state.type === Camera.Constants.Type.back
@@ -55,31 +46,60 @@ export default class NewPhoto extends React.Component {
                             : Camera.Constants.Type.back,
                         });
                       }}>
-
-                      <MaterialIcons name='switch-camera' size={50} style={{ color: "#ddd", marginLeft: 5, paddingTop: 22 }} />
+                      <MaterialIcons name='switch-camera' size={50} style={ styles.iconFlip } />
                     </TouchableOpacity>
                   </View>
 
-                  <View
-                    style={{
-                        flex: 1,
-                        backgroundColor: 'transparent',
-                        flexDirection: 'row',
-                    }}>
-                    <TouchableOpacity
-                        style={{
-                        flex: 1,
-                        alignSelf: 'flex-end',
-                        alignItems: 'center',
-                        }}
-                        onPress={() => { console.log("TIRANDO FOTO (OU NÃO)") }}>
-
-                        <MaterialCommunityIcons name='camera-iris' size={50} style={{ color: "#ddd", marginLeft: 5, paddingBottom: 15 }} />
+                  <View style={ styles.areaBotaoTake }>
+                    <TouchableOpacity style={ styles.botaoTake } onPress={() => { console.log("TIRANDO FOTO (OU NÃO)") }}>
+                        <MaterialCommunityIcons name='camera-iris' size={50} style={ styles.iconTake } />
                     </TouchableOpacity>
-                </View>
+                  </View>
                 </Camera>
+
               </View>
             )
         }
     }
 }
+
+
+const styles = StyleSheet.create({
+  camera: {
+    flex: 1 
+  },
+  areaBotaoFlip: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
+  },
+  botaoFlip: {
+    flex: 1,
+    alignSelf: 'flex-start',
+    alignItems: 'center',
+    flexDirection: "row",
+  },
+  areaBotaoTake: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
+  },
+  botaoTake: {
+    flex: 1,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+  },
+  iconTake: { 
+    color: "#ddd", 
+    marginLeft: 5, 
+    paddingBottom: 15 
+  },
+  iconFlip: {
+    color: "#ddd", 
+    marginLeft: 5, 
+    paddingTop: 22
+  },
+  wrapper: {
+    flex: 1 
+  }
+})

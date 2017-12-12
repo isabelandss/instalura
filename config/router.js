@@ -1,10 +1,10 @@
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
-// import { Icon } from 'react-native-elements';s
 import Home from '../src/screens/Home';
+import Profile from '../src/screens/Profile';
 import NewPhoto from '../src/screens/NewPhoto';
 import { Platform, Image } from 'react-native';
-import { MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons, Entypo, FontAwesome } from '@expo/vector-icons';
 
 export const Tabs = TabNavigator({
     Home: {
@@ -19,6 +19,12 @@ export const Tabs = TabNavigator({
         tabBarIcon: () => <MaterialIcons name='photo-camera' size={26} style={{ color: "black" }} />
       },
     },
+    Profile: {
+      screen: Profile,
+      navigationOptions: {
+        tabBarIcon: () => <FontAwesome name='user' size={26} style={{ color: "black" }} />
+      },
+    }
 }, {
     headerMode: 'none',
     tabBarPosition: 'bottom',
