@@ -1,4 +1,5 @@
 import React from 'react'
+import { MaterialIcons, Ionicons, Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
 import { 
   StyleSheet, 
   Text, 
@@ -42,9 +43,10 @@ export default class NewPhoto extends React.Component {
                     }}>
                     <TouchableOpacity
                       style={{
-                        flex: 0.1,
-                        alignSelf: 'flex-end',
+                        flex: 1,
+                        alignSelf: 'flex-start',
                         alignItems: 'center',
+                        flexDirection: "row",
                       }}
                       onPress={() => {
                         this.setState({
@@ -53,12 +55,28 @@ export default class NewPhoto extends React.Component {
                             : Camera.Constants.Type.back,
                         });
                       }}>
-                      <Text
-                        style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                        {' '}Flip{' '}
-                      </Text>
+
+                      <MaterialIcons name='switch-camera' size={50} style={{ color: "#ddd", marginLeft: 5, paddingTop: 22 }} />
                     </TouchableOpacity>
                   </View>
+
+                  <View
+                    style={{
+                        flex: 1,
+                        backgroundColor: 'transparent',
+                        flexDirection: 'row',
+                    }}>
+                    <TouchableOpacity
+                        style={{
+                        flex: 1,
+                        alignSelf: 'flex-end',
+                        alignItems: 'center',
+                        }}
+                        onPress={() => { console.log("TIRANDO FOTO (OU NÃO)") }}>
+
+                        <MaterialCommunityIcons name='camera-iris' size={50} style={{ color: "#ddd", marginLeft: 5, paddingBottom: 15 }} />
+                    </TouchableOpacity>
+                </View>
                 </Camera>
               </View>
             )
