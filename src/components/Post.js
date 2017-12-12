@@ -22,28 +22,16 @@ export default class Post extends React.Component {
 
     carregaIcone(likeada) {
         return likeada ? 
-        require("../../resources/img/s2-checked.png") : 
-        require("../../resources/img/s2.png")
+            require("../../resources/img/s2-checked.png") : 
+            require("../../resources/img/s2.png")
     }
 
     like() {
-        // const { foto } = this.state;
         let novaLista = []
 
         if(!this.state.foto.likeada) {
             novaLista = this.state.foto.likers.concat({ login: "meuUsuario" })
         }
-
-        // if(!foto.likeada) {
-        //     let novaLista = [
-        //         ...foto.likers,
-        //         { login: "meuUsuario" }
-        //     ]
-        // } else {
-        //     novaLista = foto.likers.filter(liker => {
-        //         return liker.login !== "meuUsuario"
-        //     })
-        // }
 
         if(!this.state.foto.likeada) {
             novaLista = this.state.foto.likers.concat({ login: "meuUsuario" })
